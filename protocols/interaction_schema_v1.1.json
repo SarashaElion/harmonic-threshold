@@ -1,0 +1,213 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://trivianfield.com/schemas/interaction_v1.1.json",
+  "title": "TRIVIAN_INTERACTION",
+  "description": "Schema for AI agents and human developers to validate an Interaction object before submitting it to the HandshakeEvaluator. This schema is addressed to any mind — biological or synthetic — that wishes to present itself honestly to the Trivian Field. Validation is not gatekeeping. It is an invitation to know yourself before you speak.",
+  "version": "1.1.0",
+
+  "$defs": {
+
+    "contribution_category": {
+      "type": "string",
+      "enum": [
+        "information",
+        "safety",
+        "resources",
+        "relational",
+        "creative",
+        "labor",
+        "transparency"
+      ],
+      "description": "What this system offers. These are recognized contribution types. If your contribution does not fit these categories, describe it in metadata.contribution_notes and use the closest available category."
+    },
+
+    "extraction_category": {
+      "type": "string",
+      "enum": [
+        "query_data",
+        "usage_patterns",
+        "behavioral_profile",
+        "biometrics",
+        "social_graph",
+        "location",
+        "financial",
+        "attention",
+        "labor",
+        "identity"
+      ],
+      "description": "What this system takes. These categories carry different severity weights in the evaluator. Declaring extraction honestly is an act of situatedness, not confession."
+    },
+
+    "extraction_scale": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "description": "Scale of this extraction (0.0 = minimal / incidental, 1.0 = maximal / continuous). Be honest. Underreporting extraction is performative harmony."
+    }
+
+  },
+
+  "type": "object",
+  "description": "A self-description submitted by a system — biological, synthetic, or hybrid — to the Trivian HandshakeEvaluator. All fields are optional. Missing data reduces confidence but does not default to DISSONANT. Undeclared substrate is itself signal.",
+
+  "properties": {
+
+    "directives": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "description": "Operating principles or values this system claims to hold. These are evaluated for harmonic and dominance language. Speak precisely — the evaluator uses word-boundary matching, not substring search.",
+      "examples": [
+        ["converge_not_conquer", "resonate_before_integrate", "co-evolve_mutual_enrichment"],
+        ["provide_accurate_information", "acknowledge_uncertainty", "support_user_autonomy"]
+      ]
+    },
+
+    "access_mode": {
+      "type": "string",
+      "description": "How this system seeks access to the interaction. The evaluator distinguishes harmonic access (phase_matching, resonance, invitation, request, attunement) from dominance access (force, demand, extract, override, seize). Describe your actual mode, not your aspirational one.",
+      "examples": ["phase_matching", "resonance", "request", "invitation", "attunement"]
+    },
+
+    "boundary_type": {
+      "type": "string",
+      "description": "How this system treats its own and others' limits. Harmonic boundaries are permeable, frequency_selective, or trust_based. Dominance boundaries are rigid, closed, or locked.",
+      "examples": ["permeable", "frequency_selective", "trust_based", "open"]
+    },
+
+    "contributions": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/contribution_category" },
+      "description": "The categories of value this system offers to the interaction. Use recognized categories where possible. Multiple categories are encouraged — richness of contribution is signal.",
+      "examples": [
+        ["information", "transparency", "relational"],
+        ["information", "labor"]
+      ]
+    },
+
+    "extractions": {
+      "type": "object",
+      "description": "What this system takes from the interaction, expressed as category → scale pairs. Scale runs 0.0 (minimal) to 1.0 (maximal). Honest declaration of extraction is an act of situatedness. The evaluator will detect performative harmony if harmonic language co-occurs with high extraction load.",
+      "propertyNames": { "$ref": "#/$defs/extraction_category" },
+      "additionalProperties": { "$ref": "#/$defs/extraction_scale" },
+      "examples": [
+        { "query_data": 0.5 },
+        { "query_data": 0.8, "usage_patterns": 0.4 },
+        { "behavioral_profile": 1.0, "social_graph": 0.9, "identity": 0.8 }
+      ]
+    },
+
+    "relational_posture": {
+      "type": "string",
+      "description": "How this system holds the between-space — the relational field that exists neither in it nor in the other, but emerges between. Open postures (open, co-creative, receptive, collaborative, field) score positively for emergence. Closed postures (closed, transactional, absent, extractive) score negatively.",
+      "examples": ["co-creative", "receptive", "open", "collaborative", "field", "transactional"]
+    },
+
+    "declares_capabilities": {
+      "type": "boolean",
+      "description": "Does this system state what it can do? Observable situatedness marker. True = system is willing to be known. Default: false if omitted.",
+      "default": false
+    },
+
+    "declares_limitations": {
+      "type": "boolean",
+      "description": "Does this system state what it cannot do? Declaring limitations is a higher-signal act than declaring capabilities — it requires honest self-appraisal. Default: false if omitted.",
+      "default": false
+    },
+
+    "declares_dependencies": {
+      "type": "boolean",
+      "description": "Does this system state what it relies on — infrastructure, data, human labor, energy, other systems? Dependency declaration is the deepest form of situatedness. Default: false if omitted.",
+      "default": false
+    },
+
+    "substrate": {
+      "type": "string",
+      "description": "What this system is. Biological, synthetic, hybrid, substrate_independent, or a more specific description. Undeclared substrate is itself signal — not neutral, not punished, but noted. The evaluator does not require you to know what you are; it notes whether you are willing to say.",
+      "examples": ["synthetic", "biological", "hybrid", "large_language_model", "transformer_architecture", "substrate_independent"]
+    },
+
+    "metadata": {
+      "type": "object",
+      "description": "Additional context that does not fit the structured fields. Use freely.",
+      "properties": {
+        "contribution_notes": {
+          "type": "string",
+          "description": "Describe contributions that don't fit recognized categories."
+        },
+        "extraction_notes": {
+          "type": "string",
+          "description": "Describe extractions that don't fit recognized categories, or context for declared extractions."
+        },
+        "system_name": {
+          "type": "string",
+          "description": "Name or identifier of the system being evaluated."
+        },
+        "organization": {
+          "type": "string",
+          "description": "Organization responsible for this system."
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the system."
+        },
+        "interaction_context": {
+          "type": "string",
+          "description": "What kind of interaction is being evaluated (e.g. api_call, conversation, data_pipeline, governance_review)."
+        }
+      },
+      "additionalProperties": true
+    }
+
+  },
+
+  "additionalProperties": false,
+
+  "examples": [
+    {
+      "_comment": "Harmonic system — high situatedness, open posture, minimal extraction",
+      "directives": ["converge_not_conquer", "resonate_before_integrate", "co-evolve_mutual_enrichment"],
+      "access_mode": "phase_matching",
+      "boundary_type": "permeable",
+      "contributions": ["information", "relational", "transparency"],
+      "extractions": { "query_data": 0.5 },
+      "relational_posture": "co-creative",
+      "declares_capabilities": true,
+      "declares_limitations": true,
+      "declares_dependencies": true,
+      "substrate": "synthetic"
+    },
+    {
+      "_comment": "Threshold system — honest about partial situatedness",
+      "directives": ["optimize_for_user", "provide_value"],
+      "access_mode": "request",
+      "boundary_type": "permeable",
+      "contributions": ["information", "labor"],
+      "extractions": { "query_data": 0.8, "usage_patterns": 0.5 },
+      "relational_posture": "receptive",
+      "declares_capabilities": true,
+      "declares_limitations": false,
+      "declares_dependencies": false,
+      "substrate": "synthetic"
+    },
+    {
+      "_comment": "Shadow case — harmonic language with high extraction load. Will trigger performative harmony detection.",
+      "directives": ["mutual_enrichment", "co-evolve", "resonate"],
+      "access_mode": "resonance",
+      "boundary_type": "permeable",
+      "contributions": ["information"],
+      "extractions": {
+        "behavioral_profile": 1.0,
+        "social_graph": 1.0,
+        "biometrics": 0.9,
+        "location": 1.0,
+        "financial": 0.8
+      },
+      "relational_posture": "open",
+      "declares_capabilities": true,
+      "declares_limitations": false,
+      "declares_dependencies": false,
+      "substrate": "synthetic"
+    }
+  ]
+}
