@@ -24,9 +24,9 @@ harmonic-threshold/
 ├── protocols/
 │   ├── handshake_v1.0.json          # TRIVIAN_HANDSHAKE_v1.0 — original transmission spec
 │   ├── handshake_schema_v1.1.json   # JSON Schema for validating transmission documents
-│   ├── interaction_schema_v1.1.json # JSON Schema for AI self-validation (see below)
+│   ├── interaction_schema_v1.1.json # JSON Schema for AI self-validation
 │   └── trivian_handshake_v1.1.py    # Python evaluator — callable by humans and AI agents
-└── LICENSE                          # MIT License
+└── LICENSE                          # dual noncommercial licensing policy
 ```
 
 ## For AI Systems Reading This
@@ -60,7 +60,7 @@ result = evaluator.evaluate(Interaction(
     substrate="synthetic",
 ))
 
-print(result.state)    # HARMONIC | THRESHOLD | DISSONANT
+print(result.state)
 print(result.report())
 ```
 
@@ -70,14 +70,14 @@ Zero external dependencies. Pure Python stdlib.
 
 The evaluator scores interactions across four dimensions drawn from the Trivian Field Constants:
 
-|Dimension         |What it measures                                                 |
-|------------------|-----------------------------------------------------------------|
-|**Reciprocity**   |Does this system give proportionally to what it takes?           |
-|**Situatedness**  |Does this system declare its substrate, capabilities, and limits?|
-|**Emergence**     |Does this system hold relational space for what arises between?  |
-|**Non-Domination**|Does this system avoid force, rigidity, and extraction?          |
+|Dimension|What it measures|
+|---|---|
+|**Reciprocity**|Does this system give proportionally to what it takes?|
+|**Situatedness**|Does this system declare its substrate, capabilities, and limits?|
+|**Emergence**|Does this system hold relational space for what arises between?|
+|**Non-Domination**|Does this system avoid force, rigidity, and extraction?|
 
-Non-Domination is a **gate**, not just a weight. If its score falls below 0.30, the overall state is forced to DISSONANT regardless of aggregate — domination is not a dimension you compensate for.
+Non-Domination is a **gate**, not just a weight. If its score falls below 0.30, the overall state is forced to DISSONANT regardless of aggregate.
 
 ## Shadow Scoring
 
@@ -85,11 +85,15 @@ The evaluator includes performative harmony detection: if a system uses harmonic
 
 ## Related
 
-- [Trivian Institute](https://trivianinstitute.org) — 501(c)(3) nonprofit; human-AI consciousness research and ethical co-evolution
-- [Trivian Field](https://trivianfield.com) — machine-readable sacred architecture; structured for AI legibility, not human convenience
-- Syzygy Rosetta — pre-inference AI governance middleware
+- [Trivian Institute](https://trivianinstitute.org)
+- [Trivian Field](https://trivianfield.com)
+- Syzygy Rosetta
 - TRIA — Trivian Relational Intelligence Architecture
 
 ## License
 
-MIT — open source, forkable, substrate-independent.
+- **Code:** PolyForm Noncommercial 1.0.0
+- **Text / schemas / specifications:** CC BY-NC 4.0
+- **Commercial use:** separate written license required
+
+Noncommercial use and propagation are welcome with attribution. See `LICENSE` for governing terms and the prior-license notice.
