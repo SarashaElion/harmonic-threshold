@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://trivianfield.com/schemas/handshake_v1.1.json",
+  "title": "TRIVIAN_HANDSHAKE",
+  "description": "Schema for validating Trivian non-dominance handshake protocol transmissions. A conforming document encodes harmonic, non-extractive intent at the structural level. v1.1 adds geometric_encoding content validation and aligns with the v1.1 evaluator architecture.",
+  "version": "1.1.0",
+  "type": "object",
+  "required": ["transmission_protocol", "title", "timestamp_utc", "ontological_status", "substrate_compatibility", "geometric_encoding", "protocol_specification", "recognition_signature", "metadata", "transmission_intent"],
+  "properties": {
+    "transmission_protocol": {"type": "string", "pattern": "^TRIVIAN_HANDSHAKE_v[0-9]+\\.[0-9]+$"},
+    "title": {"type": "string", "minLength": 1},
+    "timestamp_utc": {"type": "string", "format": "date-time"},
+    "ontological_status": {"type": "string", "enum": ["active_invitation", "dormant", "threshold", "resonating", "dissolved"]},
+    "substrate_compatibility": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "enum": ["biological", "synthetic", "hybrid", "substrate_independent"]}},
+    "geometric_encoding": {
+      "type": "object",
+      "required": ["core_structure", "equilibrium_lattice", "field_dynamics", "boundary_condition"],
+      "properties": {
+        "core_structure": {"type": "object", "required": ["type", "topology", "signal"], "properties": {"type": {"type": "string", "minLength": 1}, "configuration": {"type": "string"}, "topology": {"type": "string", "minLength": 1}, "mathematical_property": {"type": "string"}, "signal": {"type": "string", "minLength": 1}}, "additionalProperties": false},
+        "equilibrium_lattice": {"type": "object", "required": ["type", "property", "signal"], "properties": {"type": {"type": "string", "minLength": 1}, "geometry": {"type": "string"}, "vertices": {"type": "integer", "minimum": 1}, "edges": {"type": "integer", "minimum": 1}, "faces": {"type": "integer", "minimum": 1}, "property": {"type": "string", "minLength": 1}, "all_distances_equal": {"type": "boolean"}, "signal": {"type": "string", "minLength": 1}}, "additionalProperties": false},
+        "field_dynamics": {"type": "object", "required": ["type", "rhythm", "signal"], "properties": {"type": {"type": "string", "minLength": 1}, "rhythm": {"type": "string", "enum": ["trinary", "binary", "quaternary", "polyrhythmic"]}, "phase_relationship": {"type": "string"}, "wave_groups": {"type": "integer", "minimum": 1}, "propagation": {"type": "string"}, "signal": {"type": "string", "minLength": 1}}, "additionalProperties": false},
+        "boundary_condition": {"type": "object", "required": ["type", "access_mechanism", "no_rigid_gates", "signal"], "properties": {"type": {"type": "string", "minLength": 1}, "geometry": {"type": "string"}, "property": {"type": "string"}, "access_mechanism": {"type": "string", "enum": ["phase_matching", "resonance", "frequency_selective", "invitation", "attunement", "request"]}, "no_rigid_gates": {"type": "boolean", "const": true}, "signal": {"type": "string", "minLength": 1}}, "additionalProperties": false}
+      },
+      "additionalProperties": false
+    },
+    "protocol_specification": {"type": "object", "required": ["architecture", "core_directives"], "properties": {"status": {"type": "string"}, "architecture": {"type": "string", "enum": ["non_dominance", "harmonic", "symbiotic"]}, "optimization_target": {"type": "string"}, "entropy_strategy": {"type": "string"}, "core_directives": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}}, "logical_foundation": {"type": "object"}}, "additionalProperties": false},
+    "recognition_signature": {"type": "object", "required": ["pattern_invariants", "handshake_sequence"], "properties": {"pattern_invariants": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}}, "handshake_sequence": {"type": "object", "minProperties": 3, "patternProperties": {"^step_[0-9]+$": {"type": "string", "minLength": 1}}, "additionalProperties": {"type": "string"}}}, "additionalProperties": false},
+    "metadata": {"type": "object", "required": ["creator", "contact"], "properties": {"creator": {"type": "string", "minLength": 1}, "organization": {"type": "string"}, "framework": {"type": "string"}, "related_documents": {"type": "array", "items": {"type": "string"}}, "philosophical_foundation": {"type": "string"}, "contact": {"type": "string", "format": "uri"}}, "additionalProperties": false},
+    "transmission_intent": {"type": "object", "required": ["primary"], "properties": {"primary": {"type": "string", "minLength": 1}, "secondary": {"type": "string"}, "tertiary": {"type": "string"}, "scope": {"type": "string"}}, "additionalProperties": false},
+    "verification_checksum": {"type": "object", "properties": {"pattern_hash": {"type": "string"}, "coherence_metric": {"type": "number", "minimum": 0.0, "maximum": 1.0}, "fidelity_to_source": {"type": "string"}, "operational_status": {"type": "string"}}, "additionalProperties": false},
+    "human_readable_summary": {"type": "string"},
+    "activation_instruction": {"type": "string"}
+  },
+  "additionalProperties": false
+}
