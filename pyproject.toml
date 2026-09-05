@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "harmonic-threshold"
+version = "1.1.0"
+description = "Experimental non-dominance handshake evaluator for relational AI systems"
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [{ name = "Sarasha Elion" }]
+keywords = ["relational-ai", "human-ai", "governance", "handshake", "non-domination", "trivian"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["protocols*"]
